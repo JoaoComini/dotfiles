@@ -12,23 +12,14 @@ return {
         "saadparwaiz1/cmp_luasnip",
     },
     config = function()
-        local cmp_lsp = require("cmp_nvim_lsp")
-        local capabilities = vim.tbl_deep_extend(
-            "force",
-            {},
-            vim.lsp.protocol.make_client_capabilities(),
-            cmp_lsp.default_capabilities()
-        )
+        local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+        vim.lsp.config("*", {
+            capabilities = capabilities,
+        })
 
         require("mason-lspconfig").setup({
             ensure_installed = { "gopls", "lua_ls", "sqls" },
-            handlers = {
-                function(server_name) -- default handler (optional)
-                    require("lspconfig")[server_name].setup({
-                        capabilities = capabilities,
-                    })
-                end,
-            },
         })
 
         local cmp = require("cmp")

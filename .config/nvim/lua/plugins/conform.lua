@@ -18,11 +18,11 @@ return {
                 if not registry.is_installed(name) then
                     package:install()
                 else
-                    package:check_new_version(function(success, result_or_err)
-                        if success then
-                            package:install({ version = result_or_err.latest_version })
-                        end
-                    end)
+                    local current_version = package:get_installed_version()
+                    local latest_version = package:get_latest_version()
+                    if current_version ~= latest_version then
+                        package:install({ version = latest_version })
+                    end
                 end
             end
         end)
