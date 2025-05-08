@@ -16,11 +16,35 @@ log() {
     echo "[joaocomini/dotfiles] $1"
 }
 
+usage() {
+    echo "Usage: $0 [--include PATTERN]"
+    echo "  --include PATTERN  Only link dotfiles matching the given regex pattern"
+    echo "                    (e.g., 'nvim|hypr', '^waybar$')"
+    exit 1
+}
+
+INCLUDE_PATTERN=".*"
+
+# Parse command line arguments
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --include)
+            INCLUDE_PATTERN="$2"
+            shift 2
+            ;;
+        *)
+            usage
+            ;;
+    esac
+done
+
 log "setting up dotfile symlinks"
-log "from: $SCRIPT_DIR"
-log "to: $XDG_CONFIG_HOME"
 
 for dotfile in "${DOTFILES[@]}"; do
+  if ! echo "$dotfile" | grep -qE "$INCLUDE_PATTERN"; then
+    continue
+  fi  
+
   # Determine source and destination paths
   SOURCE="$SCRIPT_DIR/$dotfile"
   DESTINATION="$HOME/$dotfile"  # Default path
