@@ -8,6 +8,8 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 # List of dotfiles/directories to link
 DOTFILES=(
   ".config/nvim"
+  ".config/hypr"
+  ".config/waybar"
 )
 
 log() {

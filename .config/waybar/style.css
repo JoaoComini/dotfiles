@@ -1,0 +1,117 @@
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: Symbols Nerd Font Mono, JetBrains Mono, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+}
+
+window#waybar {
+    color: #bababa;
+    background-color: transparent;
+}
+
+
+#workspaces button,
+#pulseaudio,
+#network,
+#battery,
+#clock,
+#custom-power {
+    background: linear-gradient(-75deg, #383838, #383838 50%, #bababa 50%);
+    background-position: right 100%;
+    background-size: 200% 200%;
+    border: 2px solid #bababa;
+    border-radius: 18px;
+    color: #bababa;
+    transition: all 0.2s ease-out;
+}
+
+#workspaces button.active,
+#pulseaudio:hover,
+#network:hover,
+#battery:hover,
+#clock:hover,
+#custom-power:hover {
+    background-position: left 0%;
+    color: #151515;
+    transition: all 0.2s ease-out;
+}
+
+
+#clock,
+#battery,
+#network,
+#pulseaudio,
+#custom-power {
+    font-weight: 700;
+    padding: 0 10px;
+    color: #bababa;
+    margin-top: 8px;
+    margin-right: 2px;
+}
+
+#workspaces{
+    background-color: transparent;
+    margin-top: 8px;
+    margin-left: 16px;
+    font-weight: 700;
+}
+
+#workspaces button {
+    margin-right: 8px;
+}
+
+#workspaces button.active {
+    padding-right: 16px;
+    padding-left: 16px;
+}
+
+#workspaces button:hover {
+    box-shadow: inherit;
+    text-shadow: inherit;
+}
+
+#window {
+    margin-top: 8px;
+    font-weight: bolder;
+}
+
+#custom-power {
+    margin-right: 16px;
+}
+
+#battery.charging, #battery.plugged {
+    color: #ffffff;
+    background-color: #26A65B;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#tray {
+    background-color: #2980b9;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+}
+
