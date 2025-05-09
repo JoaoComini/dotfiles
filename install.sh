@@ -61,4 +61,9 @@ for dotfile in "${DOTFILES[@]}"; do
   ln -sf "$SOURCE" "$DESTINATION"
 done
 
+
+log "copying wallpapers"
+
+cp -r $SCRIPT_DIR/wallpapers $HOME/wallpapers
+
 log "✅ setup complete"
