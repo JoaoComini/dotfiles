@@ -10,6 +10,7 @@ DOTFILES=(
   ".config/nvim"
   ".config/hypr"
   ".config/waybar"
+  ".config/kitty"
 )
 
 log() {
