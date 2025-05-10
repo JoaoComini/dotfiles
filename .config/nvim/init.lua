@@ -51,6 +51,48 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
+vim.api.nvim_create_autocmd({ 'BufEnter' }, {
+    callback = function(e)
+        local tree = require('nvim-tree.api').tree
+
+        -- Nothing to do if tree is not opened
+        if not tree.is_visible() then
+            return
+        end
+
+        tree.find_file({
+            buf = e.buf,
+            open = false,
+            focus = false
+        })
+    end
+})
+
+-- Make :bd and :q behave as usual when tree is visible
+vim.api.nvim_create_autocmd({ 'QuitPre' }, {
+    callback = function()
+        local tree = require('nvim-tree.api').tree
+
+        -- Nothing to do if tree is not opened
+        if not tree.is_visible() then
+            return
+        end
+
+        -- How many focusable windows do we have? (excluding e.g. incline status window)
+        local count = 0
+        for _, id in ipairs(vim.api.nvim_list_wins()) do
+            if vim.api.nvim_win_get_config(id).focusable then
+                count = count + 1
+            end
+        end
+
+        -- We want to quit and only one window besides tree is left
+        if count == 2 then
+            vim.api.nvim_cmd({ cmd = 'qall' }, {})
+        end
+    end
+})
+
 vim.cmd([[filetype plugin on]])
 
 vim.cmd([[colorscheme tokyonight]])
