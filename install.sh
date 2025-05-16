@@ -11,6 +11,7 @@ DOTFILES=(
   ".config/hypr"
   ".config/waybar"
   ".config/kitty"
+  ".config/wofi"
 )
 
 log() {

@@ -1,6 +1,7 @@
 return {
-    'saghen/blink.cmp',
+    "saghen/blink.cmp",
+    version = "1.*",
     opts = {
-        keymap = { preset = 'super-tab' },
-    }
+        keymap = { preset = "super-tab" },
+    },
 }
