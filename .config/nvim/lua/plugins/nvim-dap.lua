@@ -7,7 +7,7 @@ return {
     },
     config = function()
         require("mason-nvim-dap").setup({
-            ensure_installed = { "cppdbg" },
+            ensure_installed = { "cppdbg", "delve" },
             handlers = {},
         })
         local dap, dapui = require("dap"), require("dapui")
